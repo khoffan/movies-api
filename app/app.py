@@ -11,17 +11,11 @@ import os
 load_dotenv()
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('BASE_URL_DATABASE')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.getenv('BASE_DATABASE_URL')
 app.config['JSON_AS_ASCII'] = False
 CORS(app)
 db = SQLAlchemy(app)
 auth = HTTPBasicAuth()
-
-
-USER_DATA = {
-    "admin": os.getenv('PASS_AUTH')
-}
-
 #movies_id movie_title movie_score create_at movie_description movie_type release_date director rating country main_actors movie_genre
 
 class Movies(db.Model):
@@ -75,6 +69,6 @@ def movies():
 
 
 if __name__ == "__main__":
-    app.run(port=5001)
+    app.run(host='0.0.0.0',port=5001)
 
 
